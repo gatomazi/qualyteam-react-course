@@ -1,4 +1,4 @@
-# qualyteam-react-course
+# Qualyteam React Course
 
 
 Adicione a dependencia json-server globalmente
@@ -9,11 +9,6 @@ Adicione a dependencia json-server globalmente
 Instalar dependencias
 
 ```yarn ```
-
-
-Para iniciar o servidor
-
-```yarn server```
 
 
  Para iniciar a aplicação execute
