@@ -1,47 +1,26 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import { Button } from "../../components/button";
-import { api } from "../../services/api";
 
 const Register = () => {
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImgUrl] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [description, setDescription] = useState("");
-  const [preparation, setPreparation] = useState("");
-  const history = useHistory();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await api.post("food", {
-      title,
-      imgUrl: imageUrl,
-      ingredients,
-      description,
-      preparation
-    });
-    history.push("/");
-  }
-
   return (
     <div className="register">
       <h1>Nova receita</h1>
       <div className="register--container">
-        <form className="register--container--form" onSubmit={handleSubmit}>
+        <form className="register--container--form" onSubmit={console.log}>
           <div className="register--container--side">
             <div className="form-group">
               <label htmlFor="title">Title</label>
-              <input id="title" onChange={e => setTitle(e.target.value)} />
+              <input id="title" onChange={console.log} />
             </div>
             <div className="form-group">
               <label htmlFor="image">Imagem (URL)</label>
-              <input id="image" onChange={e => setImgUrl(e.target.value)} />
+              <input id="image" onChange={console.log} />
             </div>
             <div className="form-group">
               <label htmlFor="ingredients">Ingredientes</label>
               <textarea
                 id="ingredients"
-                onChange={e => setIngredients(e.target.value)}
+                onChange={console.log}
               />
             </div>
           </div>
@@ -50,7 +29,7 @@ const Register = () => {
               <label htmlFor="description">Descrição</label>
               <textarea
                 id="description"
-                onChange={e => setDescription(e.target.value)}
+                onChange={console.log}
               />
             </div>
 
@@ -58,7 +37,7 @@ const Register = () => {
               <label htmlFor="preparation">Método de preparo</label>
               <textarea
                 id="preparation"
-                onChange={e => setPreparation(e.target.value)}
+                onChange={console.log}
               />
             </div>
           </div>
