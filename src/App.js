@@ -11,36 +11,35 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import { SearchProvider } from "./Context";
 
 function App() {
-
-  const [search, setSearch] = useState("")
-  const handleSearch = (search) =>{
-    setSearch(search.target.value)
-  }
-
+  
   return (
     <div className="app">
-      {true ? (
-        <Fragment>
-          <Navbar handleSearch={handleSearch} />
-          <main className="content--container">
-            <Switch>
-              <Route exact path="/">
-                <List search={search} />
-              </Route>
-              <Route path="/recipe/:id">
-                <Recipe />
-              </Route>
-              <Route exact path="/food/create">
-                <Register />
-              </Route>
-            </Switch>
-          </main>
-        </Fragment>
-      ) 
-      :(<Login /> )
-      }
+      <SearchProvider>
+
+        {true ? (
+          <Fragment>
+            <Navbar />
+            <main className="content--container">
+              <Switch>
+                <Route exact path="/">
+                  <List />
+                </Route>
+                <Route path="/recipe/:id">
+                  <Recipe />
+                </Route>
+                <Route exact path="/food/create">
+                  <Register />
+                </Route>
+              </Switch>
+            </main>
+          </Fragment>
+        ) 
+        :(<Login /> )
+        }
+      </SearchProvider>
     </div>
   );
 }
