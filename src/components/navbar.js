@@ -1,19 +1,21 @@
 import React from "react";
 import logo from "../logo.png";
+import { Link } from "react-router-dom";
 
-const Navbar = () => (
+
+const Navbar = ({handleSearch}) => (
   <nav className="navbar">
     <figure className="navbar--logo-container">
-      <img src={logo} alt="Uma imagem impressionante" />
+      <Link to="/"><img src={logo} alt="Uma imagem impressionante" /></Link>
     </figure>
     <div className="navbar--center-container">
-      <input role="search" placeholder="Procure uma receita" aria-labelledby="search"/>
+      <input onChange={handleSearch} role="search" placeholder="Procure uma receita" aria-labelledby="search"/>
     </div>
     <div className="navbar--right-container">
-        {/* não use o link com <a> use o do react-router-dom */}
-        <a to="/food/create" className="button--plus">
+        
+        <Link to="/food/create" className="button--plus">
           +
-        </a>
+        </Link>
     </div>
   </nav>
 );

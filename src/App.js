@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./App.scss";
 import { Navbar } from "./components/navbar";
 import { Login } from "./pages/login";
@@ -6,26 +6,36 @@ import { Register } from "./pages/register";
 import { List } from "./pages/list";
 import { Recipe } from "./components/recipe";
 
-const recipe = {
-  id: 6,
-  title: "Batata belga",
-  description: "Uma boa batata",
-  imageUrl:
-    "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-  ingredients: "Batata, óleo, sal.",
-  preparo: "Coloque tudo na fritadeira e uhaaa!"
-};
+
+import {
+  Route,
+  Switch
+} from "react-router-dom";
 
 function App() {
+
+  const [search, setSearch] = useState("")
+  const handleSearch = (search) =>{
+    setSearch(search.target.value)
+  }
+
   return (
     <div className="app">
       {true ? (
         <Fragment>
-          <Navbar />
+          <Navbar handleSearch={handleSearch} />
           <main className="content--container">
-            {/* <List /> */}
-            <Recipe {...recipe} />
-            {/* <Register /> */}
+            <Switch>
+              <Route exact path="/">
+                <List search={search} />
+              </Route>
+              <Route path="/recipe/:id">
+                <Recipe />
+              </Route>
+              <Route exact path="/food/create">
+                <Register />
+              </Route>
+            </Switch>
           </main>
         </Fragment>
       ) 

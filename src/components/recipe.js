@@ -1,7 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
-const Recipe = ({ title, imageUrl, description, ingredients, preparation } ) => {
+import {useParams} from "react-router-dom";
+
+import { api } from "../services/api";
+
+const Recipe = () => {
+
+  const {id} = useParams();  
+  const [recipe, setRecipe] = useState({});
+
+  useEffect(() => {
+    async function fetchRecipe(){
+      let recipe = await api.get('/food/'+id);
+      setRecipe(recipe.data)      
+    }
+    fetchRecipe();    
+  }, [id]);
+
+  const { title, imageUrl, description, ingredients, preparation } = recipe
   const loading = false;
+
   if (loading) {
     return <h1>Carregando</h1>;
   }

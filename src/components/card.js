@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "./button";
+import { Link } from "react-router-dom";
 
-const Card = ({ id, title, description, imageUrl, ingredients }) => {
+const Card = ({ id, title, description, ingredients, imageUrl }) => {
 
   return (
     <div className="card">
@@ -10,7 +11,11 @@ const Card = ({ id, title, description, imageUrl, ingredients }) => {
         <p className="card--description">{description}</p>
         <div className="card--footer">
           <sub className="card--ingredients">{ingredients}</sub>
-          <Button onClick={()=> alert(id)}>Acessar</Button>
+          
+          <Link to={{
+            pathname: `/recipe/${id}`}}>
+            <Button>Acessar</Button>
+          </Link>
         </div>
       </div>
       <figure className="card--image">

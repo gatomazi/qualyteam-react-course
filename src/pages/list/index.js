@@ -1,60 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "../../components/card";
+import { api } from "../../services/api";
 
-const recipes = [
-  {
-    id: 1,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  },
-  {
-    id: 2,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  },
-  {
-    id: 3,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  },
-  {
-    id: 4,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  },
-  {
-    id: 5,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  },
-  {
-    id: 6,
-    title: "Batata belga",
-    description: "Uma boa batata",
-    imageUrl:
-      "https://static.baratocoletivo.com.br/2017/0622/10012991/g_allfry-c4bbebed11.jpg",
-    ingredients: "Batata, óleo, sal."
-  }
-];
-const List = () => (
-  <>
-    {recipes.map(recipe => <Card key={recipe.id} {...recipe} />)}
-  </>
-);
+const List = ({search}) => {
+
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    async function fetchData(){
+      let newRecipes = await api.get('/food', {params:{title_like:search}});
+      setRecipes(newRecipes.data);
+    }
+    fetchData();
+  }, [search]);
+
+  return (
+    <>
+      {recipes.map(recipe => <Card key={recipe.id} {...recipe} />)}
+    </>
+  );
+};
 
 export { List };
